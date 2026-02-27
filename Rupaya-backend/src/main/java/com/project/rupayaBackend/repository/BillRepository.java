@@ -1,14 +1,14 @@
 package com.project.rupayaBackend.repository;
 
-import com.project.rupayaBackend.entity.Bill;
+import java.util.UUID;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Map;
-import java.util.UUID;
+import com.project.rupayaBackend.entity.Bill;
 
 public interface BillRepository extends JpaRepository<Bill, UUID> {
     @Query("""

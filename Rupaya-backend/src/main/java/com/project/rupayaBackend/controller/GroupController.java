@@ -1,22 +1,37 @@
 package com.project.rupayaBackend.controller;
 
-import com.project.rupayaBackend.dto.*;
-import com.project.rupayaBackend.repository.GroupRepository;
-import com.project.rupayaBackend.security.CustomUserDetails;
-import com.project.rupayaBackend.service.GroupService;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import java.util.UUID;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.UUID;
+import com.project.rupayaBackend.dto.AddMemberRequest;
+import com.project.rupayaBackend.dto.GroupCreationRequest;
+import com.project.rupayaBackend.dto.GroupDetailResponse;
+import com.project.rupayaBackend.dto.GroupMembersResponse;
+import com.project.rupayaBackend.dto.GroupResponse;
+import com.project.rupayaBackend.dto.MessageResponse;
+import com.project.rupayaBackend.dto.PaginatedResponse;
+import com.project.rupayaBackend.dto.UpdateGroup;
+import com.project.rupayaBackend.security.CustomUserDetails;
+import com.project.rupayaBackend.service.GroupService;
+
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RequestMapping("/api/v1/groups/")
 @RestController
 @RequiredArgsConstructor
 public class GroupController {
-    private final GroupRepository groupRepository;
     private final GroupService groupService;
 
     @PostMapping
