@@ -1,0 +1,58 @@
+from datetime import datetime
+
+from pydantic import BaseModel
+
+from app.models.users import UserOut
+
+
+
+class GroupCreate(BaseModel):
+    name: str
+    description: str | None = None
+    initial_members: list[str] = []  # emails
+
+
+class GroupUpdate(BaseModel):
+    name: str | None = None
+    description: str | None = None
+
+
+from uuid import UUID
+
+class GroupOut(BaseModel):
+    id: UUID
+    name: str
+    description: str | None
+    created_by: UUID | None
+    created_at: datetime
+    member_count: int = 0
+    total_owed: float = 0
+    total_owe: float = 0
+
+
+    class Config:
+        from_attributes = True
+
+
+class GroupMemberOut(BaseModel):
+    id: UUID
+    user: UserOut
+    role: str
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class GroupDetailOut(GroupOut):
+    members: list[GroupMemberOut]
+
+
+class AddMemberRequest(BaseModel):
+    email: str
+    role: str = "MEMBER"
+
+
+class MemberUpdate(BaseModel):
+    role: str
+
